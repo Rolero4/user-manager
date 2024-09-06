@@ -22,7 +22,7 @@ const FilterField: React.FC<FilterFieldProps> = ({
                 value={value}
                 onChange={(e) => onFilterChange(e.target.value)}
                 placeholder={placeholder}
-                sx={{ "margin-top": "10px" }}
+                sx={{ marginTop: "10px" }}
                 fullWidth
             />
         </TableCell>
