@@ -1,18 +1,12 @@
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import React from "react";
+
+import "./Footer.scss";
 
 const Footer: React.FC = () => {
     return (
-        <Box
-            component="footer"
-            sx={{
-                py: 2,
-                backgroundColor: "grey.900",
-                color: "white",
-                textAlign: "center",
-            }}
-        >
-            <Typography variant="body2">© 2024 My Application</Typography>
+        <Box component="footer" className="footer">
+            <p>© 2024 User-Manager</p>
         </Box>
     );
 };

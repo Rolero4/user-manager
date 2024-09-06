@@ -1,14 +1,11 @@
-import { AppBar, Toolbar, Typography } from "@mui/material";
+import { Box } from "@mui/material";
+import "./Header.scss";
 
 const Header: React.FC = () => {
     return (
-        <AppBar position="static">
-            <Toolbar>
-                <Typography variant="h6" component="div">
-                    My Application
-                </Typography>
-            </Toolbar>
-        </AppBar>
+        <Box component="header" className="header">
+            <p>User-Manager</p>
+        </Box>
     );
 };
 
