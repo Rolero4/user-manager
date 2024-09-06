@@ -2,40 +2,29 @@ import { Table, TableBody, TableCell, TableRow } from "@mui/material";
 import React, { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../app/hooks"; // Import the typed hooks
 
-import { UserFilter } from "../models/user.model";
-import {
-    selectUserFilters,
-    selectUsers,
-} from "../services/users/user.selector";
-import { fetchUsers, setFilter } from "../services/users/user.slice";
+import { selectUsers } from "../services/users/user.selector";
+import { fetchUsers } from "../services/users/user.slice";
 import TableHeader from "./UsersTableHeader";
 import UsersTableRow from "./UsersTableRow";
 
+import { filterUsers } from "../helpers/filterUsers.helper";
+import { selectFilters } from "../services/filters/filters.selector";
+import { setFilter } from "../services/filters/filters.slice";
 import "./UsersTable.scss";
 
 const UsersTable: React.FC = () => {
     const dispatch = useAppDispatch();
     const users = useAppSelector(selectUsers);
-    const filters = useAppSelector(selectUserFilters);
+    const filters = useAppSelector(selectFilters);
+    const filteredUsers = filterUsers(users, filters);
 
     useEffect(() => {
         dispatch(fetchUsers());
     }, [dispatch]);
 
-    const handleFilterChange = (field: UserFilter, value: string) => {
+    const handleFilterChange = (field: keyof typeof filters, value: string) => {
         dispatch(setFilter({ field, value }));
     };
-
-    const filteredUsers = users.filter((user) => {
-        return (
-            user.name.toLowerCase().includes(filters.name.toLowerCase()) &&
-            user.username
-                .toLowerCase()
-                .includes(filters.username.toLowerCase()) &&
-            user.email.toLowerCase().includes(filters.email.toLowerCase()) &&
-            user.phone.toLowerCase().includes(filters.phone.toLowerCase())
-        );
-    });
 
     return (
         <div className="table-container fade-in">

@@ -1,6 +1,6 @@
 import { TableHead, TableRow } from "@mui/material";
 import React from "react";
-import { UserFilter } from "../models/user.model";
+import { FilterKey } from "../models/filters.model";
 import FilterField from "./FilterField";
 
 type TableHeaderProps = {
@@ -10,7 +10,7 @@ type TableHeaderProps = {
         email: string;
         phone: string;
     };
-    onFilterChange: (field: UserFilter, value: string) => void;
+    onFilterChange: (field: FilterKey, value: string) => void;
 };
 
 const TableHeader: React.FC<TableHeaderProps> = ({

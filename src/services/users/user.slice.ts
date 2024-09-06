@@ -1,29 +1,17 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { fetchUsersFromApi } from "../../api/user.api";
-import { User, UserFilter } from "../../models/user.model";
+import { User } from "../../models/user.model";
 
 type UsersState = {
     users: User[];
     loading: boolean;
     error: string | null;
-    filters: {
-        name: string;
-        username: string;
-        email: string;
-        phone: string;
-    };
 };
 
 const initialState: UsersState = {
     users: [],
     loading: false,
     error: null,
-    filters: {
-        name: "",
-        username: "",
-        email: "",
-        phone: "",
-    },
 };
 
 export const fetchUsers = createAsyncThunk("users/fetchUsers", async () => {
@@ -34,15 +22,7 @@ export const fetchUsers = createAsyncThunk("users/fetchUsers", async () => {
 const usersSlice = createSlice({
     name: "users",
     initialState,
-    reducers: {
-        setFilter: (
-            state,
-            action: PayloadAction<{ field: UserFilter; value: string }>
-        ) => {
-            const { field, value } = action.payload;
-            state.filters[field] = value;
-        },
-    },
+    reducers: {},
     extraReducers: (builder) => {
         builder
             .addCase(fetchUsers.pending, (state) => {
@@ -62,7 +42,5 @@ const usersSlice = createSlice({
             });
     },
 });
-
-export const { setFilter } = usersSlice.actions;
 
 export default usersSlice.reducer;
