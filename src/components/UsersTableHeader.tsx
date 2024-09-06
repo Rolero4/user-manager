@@ -1,6 +1,7 @@
-import { TableCell, TableHead, TableRow, TextField } from "@mui/material";
+import { TableHead, TableRow } from "@mui/material";
 import React from "react";
 import { UserFilter } from "../models/user.model";
+import FilterField from "./FilterField";
 
 type TableHeaderProps = {
     filters: {
@@ -19,56 +20,32 @@ const TableHeader: React.FC<TableHeaderProps> = ({
     return (
         <TableHead>
             <TableRow>
-                <TableCell>
-                    Name
-                    <TextField
-                        variant="outlined"
-                        size="small"
-                        value={filters.name}
-                        onChange={(e) => onFilterChange("name", e.target.value)}
-                        placeholder="Search Name"
-                        fullWidth
-                    />
-                </TableCell>
-                <TableCell>
-                    Username
-                    <TextField
-                        variant="outlined"
-                        size="small"
-                        value={filters.username}
-                        onChange={(e) =>
-                            onFilterChange("username", e.target.value)
-                        }
-                        placeholder="Search Username"
-                        fullWidth
-                    />
-                </TableCell>
-                <TableCell>
-                    Email
-                    <TextField
-                        variant="outlined"
-                        size="small"
-                        value={filters.email}
-                        onChange={(e) =>
-                            onFilterChange("email", e.target.value)
-                        }
-                        placeholder="Search Email"
-                        fullWidth
-                    />
-                </TableCell>
-                <TableCell>
-                    Phone
-                    <TextField
-                        variant="outlined"
-                        size="small"
-                        value={filters.phone}
-                        onChange={(e) =>
-                            onFilterChange("phone", e.target.value)
-                        }
-                        placeholder="Search Phone"
-                        fullWidth
-                    />
-                </TableCell>
+                <FilterField
+                    label="Name"
+                    value={filters.name}
+                    placeholder="Search Name"
+                    onFilterChange={(value) => onFilterChange("name", value)}
+                />
+                <FilterField
+                    label="Username"
+                    value={filters.username}
+                    placeholder="Search Username"
+                    onFilterChange={(value) =>
+                        onFilterChange("username", value)
+                    }
+                />
+                <FilterField
+                    label="Email"
+                    value={filters.email}
+                    placeholder="Search Email"
+                    onFilterChange={(value) => onFilterChange("email", value)}
+                />
+                <FilterField
+                    label="Phone"
+                    value={filters.phone}
+                    placeholder="Search Phone"
+                    onFilterChange={(value) => onFilterChange("phone", value)}
+                />
             </TableRow>
         </TableHead>
     );

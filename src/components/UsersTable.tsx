@@ -11,6 +11,8 @@ import { fetchUsers, setFilter } from "../services/users/user.slice";
 import TableHeader from "./UsersTableHeader";
 import UsersTableRow from "./UsersTableRow";
 
+import "./UsersTable.scss";
+
 const UsersTable: React.FC = () => {
     const dispatch = useAppDispatch();
     const users = useAppSelector(selectUsers);
@@ -41,7 +43,7 @@ const UsersTable: React.FC = () => {
     });
 
     return (
-        <div>
+        <div className="table-container fade-in">
             <Table>
                 <TableHeader
                     onFilterChange={handleFilterChange}
@@ -53,7 +55,9 @@ const UsersTable: React.FC = () => {
                     ))}
                     {filteredUsers.length === 0 && (
                         <TableRow>
-                            <TableCell colSpan={4}>No users found.</TableCell>
+                            <TableCell colSpan={4} className="fade-in">
+                                No users found.
+                            </TableCell>
                         </TableRow>
                     )}
                 </TableBody>
