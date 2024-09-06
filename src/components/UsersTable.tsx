@@ -1,7 +1,8 @@
 import { Table, TableBody, TableCell, TableRow } from "@mui/material";
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { useAppDispatch, useAppSelector } from "../app/hooks"; // Import the typed hooks
 
+import { UserFilter } from "../models/user.model";
 import {
     selectUserFilters,
     selectUsers,
@@ -14,12 +15,17 @@ const UsersTable: React.FC = () => {
     const dispatch = useAppDispatch();
     const users = useAppSelector(selectUsers);
     const filters = useAppSelector(selectUserFilters);
+    const fetchCalledRef = useRef(false);
 
     useEffect(() => {
-        dispatch(fetchUsers());
+        if (!fetchCalledRef.current) {
+            console.log("Fetching users");
+            dispatch(fetchUsers());
+            fetchCalledRef.current = true;
+        }
     }, [dispatch]);
 
-    const handleFilterChange = (field: string, value: string) => {
+    const handleFilterChange = (field: UserFilter, value: string) => {
         dispatch(setFilter({ field, value }));
     };
 

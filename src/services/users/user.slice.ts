@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { fetchUsersFromApi } from "../../api/user.api";
-import { User } from "../../models/user.model";
+import { User, UserFilter } from "../../models/user.model";
 
 type UsersState = {
     users: User[];
@@ -37,10 +37,10 @@ const usersSlice = createSlice({
     reducers: {
         setFilter: (
             state,
-            action: PayloadAction<{ field: string; value: string }>
+            action: PayloadAction<{ field: UserFilter; value: string }>
         ) => {
             const { field, value } = action.payload;
-            state.filters[field as keyof UsersState["filters"]] = value;
+            state.filters[field] = value;
         },
     },
     extraReducers: (builder) => {

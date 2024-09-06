@@ -5,3 +5,5 @@ export type User = {
     email: string;
     phone: string;
 };
+
+export type UserFilter = "email" | "username" | "name" | "phone";
